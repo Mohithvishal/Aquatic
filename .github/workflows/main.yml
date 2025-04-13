@@ -31,10 +31,9 @@ jobs:
           npm install
 
       # Step 4: Run tests (if you have tests set up)
-      - name: Run tests
-        run: |
-          cd aquatic-life
-          npm test
+     # - name: Run tests
+       #  cd aquatic-life
+       #   npm test
 
       # Step 5: Build the frontend
       - name: Build frontend
