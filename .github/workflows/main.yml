@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Build and Test Frontend & Backend
 
 on:
   push:
@@ -9,19 +9,78 @@ on:
       - main
 
 jobs:
-  build:
+  frontend:
+    name: Frontend Build and Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm install
 
-      - name: Run tests
-        run: npm test
+      - name: Run frontend tests
+        run: |
+          cd frontend
+          npm test
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
+
+  backend:
+    name: Backend Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Run backend tests
+        run: |
+          cd backend
+          npm test
+
+      - name: Build backend
+        run: |
+          cd backend
+          npm run build
+
+  machine-learning:
+    name: Machine Learning Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install ML dependencies
+        run: |
+          cd ml
+          pip install -r requirements.txt
+
+      - name: Run ML tests
+        run: |
+          cd ml
+          pytest
