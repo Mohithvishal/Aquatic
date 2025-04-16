@@ -1,4 +1,4 @@
-"use client";  // Add this at the top
+"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -27,65 +27,65 @@ export default function AquaticLifeClassifier() {
   };
 
   const handleClassify = () => {
-    setOutput("Dolphin"); // Placeholder classification
+    setOutput("Dolphin"); // Placeholder
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-6" style={{ background: "linear-gradient(to bottom right, #88bef1, #5a9bd5)" }}>
-  <div className="w-full max-w-4xl bg-opacity-80 bg-white shadow-lg rounded-lg p-6 flex">
-    {/* Left Section - Drag & Drop + Upload */}
-    <div className="w-1/2 flex flex-col items-center">
-      <label className="text-lg font-medium text-gray-900 mb-2">
-        Upload an aquatic life image
-      </label>
-      <div
-        className="w-full h-40 border-2 border-dashed border-gray-300 flex items-center justify-center rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
-        onDrop={handleDrop}
-        onDragOver={(e) => e.preventDefault()}
-      >
-        <p className="text-gray-700">Drag & Drop an image here</p>
-      </div>
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleUpload}
-        className="mt-4 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-      />
-      <button
-        onClick={handleClassify}
-        className="px-6 py-3 bg-teal-600 text-white rounded-lg shadow-md hover:bg-teal-700 focus:outline-none mt-4"
-      >
-        Classify
-      </button>
-    </div>
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="w-full max-w-5xl h-2/5 bg-white/10 backdrop-blur-xl border border-white/30 rounded-2xl shadow-xl p-8 flex justify-between text-black">
 
-    {/* Right Section - Output Display */}
-    <div className="w-2/5 flex flex-col items-center pt-17 pl-20">
-  {image && (
-    <div className="w-3/4 mt-3">
-      <Image
-        src={image}
-        alt="Uploaded aquatic life"
-        width={250}
-        height={180}
-        className="rounded-md shadow"
-      />
-    </div>
-      )}
-      {/* <button
-        onClick={handleClassify}
-        className="px-6 py-3 bg-teal-600 text-white rounded-lg shadow-md hover:bg-teal-700 focus:outline-none mt-4"
-      >
-        Classify
-      </button> */}
-      {output && (
-        <div className="mt-4 p-4 bg-blue-100 rounded-lg shadow-md text-center w-full ">
-          <p className="text-l font-semibold text-blue-900">Detected: {output}</p>
+        {/* Left Section */}
+        <div className="w-1/2 flex flex-col items-center">
+          <h2 className="text-2xl font-bold mb-4 text-white">Upload an aquatic life image</h2>
+
+          <div
+            className="w-full h-40 border-2 border-dashed border-black/30 flex items-center justify-center rounded-lg cursor-pointer bg-white/10 hover:bg-white/20 transition relative"
+            onDrop={handleDrop}
+            onDragOver={(e) => e.preventDefault()}
+            onClick={() => document.getElementById("fileInput").click()}
+          >
+            <p className="text-black z-10 text-center">
+              Drag & Drop an image here
+              <br />
+              or click to upload
+            </p>
+            <input
+              id="fileInput"
+              type="file"
+              accept="image/*"
+              onChange={handleUpload}
+              className="absolute inset-0 opacity-0 cursor-pointer"
+            />
+          </div>
+
+          <button
+            onClick={handleClassify}
+            className="mt-6 px-6 py-2 bg-teal-500 hover:bg-teal-600 rounded-md font-semibold shadow-md text-white"
+          >
+            Classify
+          </button>
         </div>
-      )}
-    </div>
-  </div>
-</div>
 
+        {/* Right Section */}
+        <div className="w-1/2 flex flex-col justify-center items-center">
+          {image && (
+          <div className="mt-3">
+           <Image
+             src={image}
+             alt="Uploaded aquatic life"
+             width={250}
+             height={180}
+             className="rounded-md shadow-md"
+           />
+         </div>
+          )}
+          {output && (
+         <div className="mt-6 p-1.5 w-56 h-10 bg-white/20 backdrop-blur-md rounded-lg text-center shadow-md flex items-center justify-center">
+            <p className="text-m font-medium text-white">Detected: {output}</p>
+         </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }

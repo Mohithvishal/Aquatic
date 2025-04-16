@@ -20,12 +20,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-r from-blue-500 to-teal-500 min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen overflow-hidden`}
       >
-        {/* <header className="text-center py-8 bg-blue-700 text-white shadow-lg">
-          <h1 className="text-5xl font-extrabold">Aquatic Life Detection</h1>
-        </header> */}
-        <main className="container mx-auto p-8 bg-black rounded-lg shadow-lg mt-8">
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="fixed top-0 left-0 w-full h-full object-cover z-[-1]"
+        >
+          <source src="/videos/underwater.mp4" type="video/mp4" />
+        </video>
+
+        {/* Content */}
+        <main className="container mx-auto p-8">
           {children}
         </main>
       </body>
